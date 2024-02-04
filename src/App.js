@@ -1,24 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import { NavCom } from './navbar/NavCom';
+import { Index_Homendex } from './pages/Home';
+import { LoginForm } from './pages/Auth/Login';
+import Register from './pages/Auth/Register';
+import Dashboard from './pages/dashboard/Dashboard'; 
+import { Stack } from '@mui/material';
 
 function App() {
+  const temperature = 25;
+  const humidity = 50;
+  const co2 = 400;
+  const uv = 'high';
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Stack className="App">
+   <Dashboard 
+      temperature={temperature}
+      humidity={humidity}
+      co2={co2}
+      uv={uv}/> 
+    </Stack>
+    
   );
 }
 
