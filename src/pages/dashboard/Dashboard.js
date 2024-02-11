@@ -18,13 +18,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
 import { Card, Stack } from '@mui/material';
 import SensorData from './SensorData';
 import SensorLineChart from './SensorLineChart';
 import PropTypes from 'prop-types';
+import Notifications from '../notification/Notifications'; // Import Notifications component
 
 const drawerWidth = 240;
 
@@ -80,11 +78,23 @@ const sensorData = [
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
+const data = {
+  temperature: { value: 25, high: 30, optimal: 20, low: 10 },
+  humidity: { value: 60, high: 80, optimal: 50, low: 30 },
+  co2: { value: 400, high: 800, optimal: 300, low: 200 },
+  uv: { value: 5, high: 10, optimal: 3, low: 1 },
+};
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(true);
+  const [showNotifications, setShowNotifications] = React.useState(false); // State to manage showing notifications
+
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const handleToggleNotifications = () => {
+    setShowNotifications(!showNotifications);
   };
 
   return (
@@ -116,9 +126,9 @@ export default function Dashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              Green House Monitor
             </Typography>
-            <IconButton color="inherit">
+            <IconButton color="inherit" onClick={handleToggleNotifications}>
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
@@ -141,8 +151,6 @@ export default function Dashboard() {
           <Divider />
           <List component="nav">
             {mainListItems}
-            
-            
           </List>
         </Drawer>
         <Box
@@ -157,19 +165,10 @@ export default function Dashboard() {
             overflow: 'auto',
           }}
         >
-        
           <Toolbar />
-          <SensorData></SensorData>
-          <Card style={{ position: 'relative' }}>
-
-         <Stack style={{ position: 'absolute', top: 0, left: 0, marginTop:10 ,marginLeft:10 ,marginBottom:40}}>
-         <Typography variant='h4' style={{ fontWeight: 'bold' }}>Graph</Typography>
-         </Stack >
-
-        <SensorLineChart marginTop={40} sensorData={sensorData} />
-        </Card>
-         
-          
+          <SensorData />
+          <SensorLineChart marginTop={40} sensorData={sensorData} />
+          {showNotifications && <Notifications data={data} />} {/* Render Notifications component only when showNotifications is true */}
         </Box>
       </Box>
     </ThemeProvider>

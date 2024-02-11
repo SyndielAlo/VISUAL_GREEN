@@ -7,7 +7,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import GrassIcon from '@mui/icons-material/Grass';
 import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
-import LayersIcon from '@mui/icons-material/Layers';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Stack } from '@mui/material';
 
@@ -36,9 +36,9 @@ export const mainListItems = (
     <Stack my={1}>
     <ListItemButton>
       <ListItemIcon>
-        <AccountCircleIcon />
+        <LibraryBooksIcon />
       </ListItemIcon>
-      <ListItemText primary="Profile" />
+      <ListItemText primary="Records" />
     </ListItemButton>
     </Stack>
 
